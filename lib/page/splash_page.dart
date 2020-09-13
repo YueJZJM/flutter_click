@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutterweibo/constant/constant.dart';
+import 'package:flutterweibo/utils/user_util.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -8,6 +10,23 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(new Duration(seconds: 1),(){
+       UserUtil.isLogin().then((isLogin){
+          if(isLogin) {
+
+          }else {
+
+          }
+       });
+
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +43,7 @@ class _SplashPageState extends State<SplashPage> {
                 flex: 1,
                 child: Container(
                     alignment: Alignment.center,
-                    width: 100,
+                    width: 200,
                     child: Image(
                       fit: BoxFit.contain,
                       image: AssetImage(
@@ -37,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
               Expanded(
                 flex: 1,
                 child: Container(
-                    width: 100,
+                    width: 200,
                     alignment: Alignment.center,
                     child: Image(
                       fit: BoxFit.contain,
@@ -50,4 +69,6 @@ class _SplashPageState extends State<SplashPage> {
           ),
         ));
   }
+
+
 }
