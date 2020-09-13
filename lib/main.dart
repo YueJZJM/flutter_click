@@ -1,12 +1,24 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterweibo/page/splash_page.dart';
+import 'package:flutterweibo/routers/routers.dart';
+
+import 'routers/application.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+
+
   @override
   Widget build(BuildContext context) {
+
+    final router = Router();
+    Routes.configureRoutes(router);
+    Routes.router = router;
+
     return MaterialApp(
       title: '微博',
       theme: ThemeData(
@@ -15,6 +27,8 @@ class MyApp extends StatelessWidget {
       ),
 //      home: MyHomePage(title: 'Flutter Demo Home Page'),
       home: SplashPage(),
+      onGenerateRoute: Routes.router.generator,
+
     );
   }
 }

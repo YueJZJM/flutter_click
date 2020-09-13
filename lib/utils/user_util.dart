@@ -22,6 +22,9 @@ class UserUtil{
   static Future<bool> isLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var isLogin = prefs.getBool(SP_IS_ALLOGIN);
+    if(isLogin == null) {
+      isLogin = false;
+    }
     return isLogin;
   }
 }
