@@ -10,8 +10,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -22,8 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '微博',
       theme: ThemeData(
-
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
       ),
 //      home: MyHomePage(title: 'Flutter Demo Home Page'),
       home: SplashPage(),
