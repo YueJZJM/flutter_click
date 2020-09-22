@@ -52,7 +52,10 @@ class _HomePageState extends State<HomePage>
                          unselectedLabelStyle: TextStyle(fontSize: 16.0),
                          indicatorSize: TabBarIndicatorSize.label,
                          controller: _tabController,
-                         tabs: appBarTitles.map((e) => Tab(text: e)).toList()),
+                         tabs: appBarTitles.map((e) => Tab(text: e)).toList(),
+                     onTap: (int a){
+                           print("aaa");
+                     },),
                    ),
                    Align(
                      alignment: Alignment.topRight,
