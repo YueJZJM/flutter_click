@@ -27,4 +27,34 @@ class UserUtil{
     }
     return isLogin;
   }
+
+  static Future<void> saveUserInfo(Map data) async {
+    if(data!=null) {
+      String id = data['id'];
+      String username = data['username'];
+      String nick = data['nick'];
+      String headurl = data['headurl'];
+      String decs = data['decs'];
+      String gender = data['gender'];
+      String followCount = data['followCount'];
+      String fanCount = data['fanCount'];
+      int ismember = data['ismember'];
+      int isvertify = data['isvertify'];
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      prefs.setString(SP_USER_ID, id);
+      prefs.setString(SP_USER_NAME, username);
+      prefs.setString(SP_USER_NICK, nick);
+      prefs.setString(SP_USER_HEADURL, headurl);
+      prefs.setString(SP_USER_DESC, decs);
+      prefs.setString(SP_USER_GENDER, gender);
+      prefs.setString(SP_USER_FOLLOW, followCount);
+      prefs.setString(SP_USER_FAN, fanCount);
+      prefs.setBool(SP_IS_ALLOGIN, true);
+
+      prefs.setInt(SP_USER_ISMEMBER, ismember);
+      prefs.setInt(SP_USER_ISVERTIFY, isvertify);
+    }
+  }
 }

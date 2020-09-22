@@ -1,6 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterweibo/constant/constant.dart';
+import 'package:flutterweibo/http/dio_manager.dart';
+import 'package:flutterweibo/http/service_url.dart';
+import 'package:flutterweibo/routers/routers.dart';
+import 'package:flutterweibo/utils/toast_util.dart';
+import 'package:flutterweibo/utils/user_util.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -67,8 +73,16 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: (_inputAccount.isEmpty || _inputPwd.isEmpty)
                         ? null
                         :(){
-                        print(_inputPwd );
-                        print( _inputAccount);
+                          FormData params =
+                          FormData.fromMap( {'username': _inputAccount, 'password': _inputPwd});
+                          DioManager.getInstance().post(ServiceUrl.login,params,(data){
+                            UserUtil.saveUserInfo(data['data']);
+                            ToastUtil.show('登录成功!');
+                            Navigator.pop(context);
+                            Routes.navigateTo(context, Routes.indexPage);
+                          },(error){
+                            ToastUtil.show(error);
+                          });
                     }
                   ),
                 ),
@@ -98,7 +112,14 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildUserNameEditText(String text) {
     return TextField(
-      decoration: InputDecoration(labelText: text),
+      decoration: InputDecoration(
+          labelText: text,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+              color: Colors.orange,
+          )
+        )
+      ),
       onChanged: (v){
         _inputAccount = v;
         setState(() {
@@ -110,7 +131,14 @@ class _LoginPageState extends State<LoginPage> {
 
   buildPasswordEditText(String text) {
     return TextField(
-      decoration: InputDecoration(labelText: text),
+      decoration: InputDecoration(
+          labelText: text,
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.orange,
+              )
+          )
+      ),
       obscureText:true,
       onChanged: (v){
         _inputPwd = v;
