@@ -27,10 +27,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: (
-        Container(
-            padding: EdgeInsets.fromLTRB(
+    return Container(
+            margin: EdgeInsets.fromLTRB(
                 0, MediaQuery.of(context).padding.top, 0, 0),
             child: Column(
               children: [
@@ -74,8 +72,6 @@ class _HomePageState extends State<HomePage>
                 )
               ],
             ),
-        )
-      ),
-    );
+        );
   }
 }

@@ -8,16 +8,16 @@ class WeiBoHotPage extends StatefulWidget {
 }
 
 class _WeiBoHotPageState extends State<WeiBoHotPage> {
-  final List<String> _tabValues = ['推荐', '附近', '榜单'];
+  final List<String> _tabValues = ['推荐', '附近', '榜单', '明星', '搞笑', '社会', '测试'];
   TabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(initialIndex: 2,length: _tabValues.length, vsync: ScrollableState())
-      ..addListener(() {
-        print(_controller.index);
-      });
+    _controller = TabController(length: 7, vsync: ScrollableState());
+      // ..addListener(() {
+      //   print(_controller.index);
+      // });
   }
 
   @override
@@ -28,8 +28,7 @@ class _WeiBoHotPageState extends State<WeiBoHotPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return  Column(
         children: [
           Stack(
             children: [
@@ -37,23 +36,16 @@ class _WeiBoHotPageState extends State<WeiBoHotPage> {
                 color: Color(0xffffffff),
                 alignment: Alignment.center,
                 child:  TabBar(
-                  // isScrollable: true,
-                  // indicatorColor: Color(0xffffffff),
-                  // labelColor: Color(0xffFF3700),
-                  // unselectedLabelColor: Color(0xff666666),
-                  // labelStyle: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-                  // unselectedLabelStyle: TextStyle(fontSize: 16.0),
-                  // indicatorSize: TabBarIndicatorSize.label,
+                  isScrollable: true,
+                  indicatorColor: Color(0xffffffff),
+                  labelColor: Color(0xffFF3700),
+                  unselectedLabelColor: Color(0xff666666),
+                  labelStyle: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+                  unselectedLabelStyle: TextStyle(fontSize: 16.0),
+                  indicatorSize: TabBarIndicatorSize.label,
                   controller: _controller,
                   tabs: _tabValues.map((e) => Tab(text: e)).toList(),
-                  onTap: (int a){
-                    print("index: $a");
-                    // setState(() {
-                    //   _controller.index = a;
-                    // });
-                  },
                 ),
-
               ),
             ],
           ),
@@ -65,18 +57,18 @@ class _WeiBoHotPageState extends State<WeiBoHotPage> {
               child:TabBarView(
                 controller: _controller,
                   children:  <Widget>[
-                    // Center(
-                    //   child: Text("暂无数据1"),
-                    // ),
-                    // Center(
-                    //   child: Text("暂无数据2"),
-                    // ),
-                    // Center(
-                    //   child: Text("暂无数据3"),
-                    // ),
-                    // Center(
-                    //   child: Text("暂无数据4"),
-                    // ),
+                    Center(
+                      child: Text("暂无数据1"),
+                    ),
+                    Center(
+                      child: Text("暂无数据2"),
+                    ),
+                    Center(
+                      child: Text("暂无数据3"),
+                    ),
+                    Center(
+                      child: Text("暂无数据4"),
+                    ),
                     Center(
                       child: Text("暂无数据5"),
                     ),
@@ -95,7 +87,6 @@ class _WeiBoHotPageState extends State<WeiBoHotPage> {
                   ],
               ) )
         ],
-      ),
-    );
+      );
   }
 }

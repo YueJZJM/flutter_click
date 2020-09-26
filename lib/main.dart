@@ -1,11 +1,28 @@
+import 'dart:io';
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutterweibo/page/home/weibo_hot_page.dart';
 import 'package:flutterweibo/page/splash_page.dart';
 import 'package:flutterweibo/routers/routers.dart';
 
 import 'routers/application.dart';
 
-void main() => runApp(MyApp());
+void main(){
+  runApp(MyApp());
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xffffffff),
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarDividerColor: Color(0xffffffff),
+      statusBarColor: Colors.black,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    );
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -24,6 +41,7 @@ class MyApp extends StatelessWidget {
       ),
 //      home: MyHomePage(title: 'Flutter Demo Home Page'),
       home: SplashPage(),
+      // home: WeiBoHotPage(),
       onGenerateRoute: Routes.router.generator,
 
     );
