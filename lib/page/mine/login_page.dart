@@ -39,72 +39,74 @@ class _LoginPageState extends State<LoginPage> {
             )),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 40),
-            ),
-            Text(
-              "请输入账号密码",
-              style: new TextStyle(fontSize: 24.0, color: Colors.black),
-            ),
-            //TODO AccountEditText
-            Container(margin:  const EdgeInsets.only( top: 30.0),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+              ),
+              Text(
+                "请输入账号密码",
+                style: new TextStyle(fontSize: 24.0, color: Colors.black),
+              ),
               //TODO AccountEditText
-              child: buildUserNameEditText("手机号或邮箱"),),
+              Container(margin:  const EdgeInsets.only( top: 30.0),
+                //TODO AccountEditText
+                child: buildUserNameEditText("手机号或邮箱"),),
 //            buildEditText("手机号或邮箱"),
-            //TODO PwdEditText
-            buildPasswordEditText("密码"),
-            Padding(padding:  const EdgeInsets.only(top: 60),),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: RaisedButton(
-                    child: Text("登 录"),
-                    color: Color(0xffFF8200),
-                    textColor: Colors.white,
-                    disabledTextColor: Colors.white,
-                    disabledColor: Color(0xffFFD8AF),
-                    onPressed: (_inputAccount.isEmpty || _inputPwd.isEmpty)
-                        ? null
-                        :(){
-                          FormData params =
-                          FormData.fromMap( {'username': _inputAccount, 'password': _inputPwd});
-                          DioManager.getInstance().post(ServiceUrl.login,params,(data){
-                            UserUtil.saveUserInfo(data['data']);
-                            ToastUtil.show('登录成功!');
-                            Navigator.pop(context);
-                            Routes.navigateTo(context, Routes.indexPage);
-                          },(error){
-                            ToastUtil.show(error);
-                          });
-                    }
+              //TODO PwdEditText
+              buildPasswordEditText("密码"),
+              Padding(padding:  const EdgeInsets.only(top: 60),),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Expanded(
+                    child: RaisedButton(
+                      child: Text("登 录"),
+                      color: Color(0xffFF8200),
+                      textColor: Colors.white,
+                      disabledTextColor: Colors.white,
+                      disabledColor: Color(0xffFFD8AF),
+                      onPressed: (_inputAccount.isEmpty || _inputPwd.isEmpty)
+                          ? null
+                          :(){
+                            FormData params =
+                            FormData.fromMap( {'username': _inputAccount, 'password': _inputPwd});
+                            DioManager.getInstance().post(ServiceUrl.login,params,(data){
+                              UserUtil.saveUserInfo(data['data']);
+                              ToastUtil.show('登录成功!');
+                              Navigator.pop(context);
+                              Routes.navigateTo(context, Routes.indexPage);
+                            },(error){
+                              ToastUtil.show(error);
+                            });
+                      }
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Text("注册"),
-                ),
-                Expanded(
-                    child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text("忘记密码"),
-                )),
-              ],
-            ),
-            Padding(padding: const EdgeInsets.only(top: 40),),
-            buildOtherLoginWayText(),
-            Padding(padding:  const EdgeInsets.only(top: 150),),
-            buildOtherLoginWay(),
-          ],
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text("注册"),
+                  ),
+                  Expanded(
+                      child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text("忘记密码"),
+                  )),
+                ],
+              ),
+              Padding(padding: const EdgeInsets.only(top: 40),),
+              buildOtherLoginWayText(),
+              Padding(padding:  const EdgeInsets.only(top: 150),),
+              buildOtherLoginWay(),
+            ],
+          ),
         ),
       ),
     );
@@ -183,45 +185,43 @@ class _LoginPageState extends State<LoginPage> {
     return Row(
       children: <Widget>[
         Expanded(
-          child:Container(),
+          child:Container(
+            alignment: Alignment.centerRight,
+            margin: EdgeInsets.only(right: 10),
+            child: Column(
+              children: <Widget>[
+                Image.asset(
+                  Constant.ASSETS_IMG + 'login_weixin.png',
+                  width: 40.0,
+                  height: 40.0,
+                ),
+                Text("微信"),
+              ],
+            ),
+          ),
           flex: 1,
         ),
         Expanded(
           flex: 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Image.asset(
-                    Constant.ASSETS_IMG + 'login_weixin.png',
-                    width: 40.0,
-                    height: 40.0,
-                  ),
-                  Text("微信"),
-                ],
-              ),
-              Container(
-                width: 40,
-              ),
-              Column(
-                children: <Widget>[
-                  Image.asset(
+          child:Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(left: 10),
+            child: Column(
+              children: <Widget>[
+                Image.asset(
                   Constant.ASSETS_IMG + 'login_qq.png',
                   width: 40.0,
                   height: 40.0,
-                  ),
-                  Text("QQ"),
-                ]
-              ),
-            ],
+                ),
+                Text("QQ"),
+              ],
+            ),
           ),
         ),
-        Expanded(
-          child:Container(),
-
-          flex: 1,
-        )
+        // Expanded(
+        //   child:Container(),
+        //   flex: 1,
+        // )
       ],
     );
   }

@@ -1,3 +1,5 @@
+import 'package:flutterweibo/mode/UserModel.dart';
+import 'package:flutterweibo/utils/sp_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserUtil{
@@ -28,7 +30,7 @@ class UserUtil{
     return isLogin;
   }
 
-  static Future<void> saveUserInfo(Map data) async {
+  static User saveUserInfo(Map data) {
     if(data!=null) {
       String id = data['id'];
       String username = data['username'];
@@ -41,20 +43,51 @@ class UserUtil{
       int ismember = data['ismember'];
       int isvertify = data['isvertify'];
 
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+      SpUtil.putString(SP_USER_ID, id);
+      SpUtil.putString(SP_USER_NAME, username);
+      SpUtil.putString(SP_USER_NICK, nick);
+      SpUtil.putString(SP_USER_HEADURL, headurl);
+      SpUtil.putString(SP_USER_DESC, decs);
+      SpUtil.putString(SP_USER_GENDER, gender);
+      SpUtil.putString(SP_USER_FOLLOW, followCount);
+      SpUtil.putString(SP_USER_FAN, fanCount);
+      SpUtil.putBool(SP_IS_ALLOGIN, true);
 
-      prefs.setString(SP_USER_ID, id);
-      prefs.setString(SP_USER_NAME, username);
-      prefs.setString(SP_USER_NICK, nick);
-      prefs.setString(SP_USER_HEADURL, headurl);
-      prefs.setString(SP_USER_DESC, decs);
-      prefs.setString(SP_USER_GENDER, gender);
-      prefs.setString(SP_USER_FOLLOW, followCount);
-      prefs.setString(SP_USER_FAN, fanCount);
-      prefs.setBool(SP_IS_ALLOGIN, true);
+      SpUtil.putInt(SP_USER_ISMEMBER, ismember);
+      SpUtil.putInt(SP_USER_ISVERTIFY, isvertify);
 
-      prefs.setInt(SP_USER_ISMEMBER, ismember);
-      prefs.setInt(SP_USER_ISVERTIFY, isvertify);
+      User userInfo = User(
+          id: id,
+          username: username,
+          nick: nick,
+          headurl: headurl,
+          gender: gender,
+          decs: decs,
+          fanCount: fanCount,
+          followCount: followCount);
+      return userInfo;
     }
+    return null;
+  }
+
+  // 获取用户信息
+  static User getUserInfo() {
+    bool isLogin = SpUtil.getBool(SP_IS_ALLOGIN);
+    if (isLogin == null || !isLogin) {
+      return User();
+    }
+    User userInfo = User();
+    userInfo.id = SpUtil.getString(SP_USER_ID);
+    userInfo.username = SpUtil.getString(SP_USER_NAME);
+    userInfo.nick = SpUtil.getString(SP_USER_NICK);
+    userInfo.headurl = SpUtil.getString(SP_USER_HEADURL);
+    userInfo.decs = SpUtil.getString(SP_USER_DESC);
+    userInfo.gender = SpUtil.getString(SP_USER_GENDER);
+    userInfo.followCount = SpUtil.getString(SP_USER_FOLLOW);
+    userInfo.fanCount = SpUtil.getString(SP_USER_FAN);
+    userInfo.ismember = SpUtil.getInt(SP_USER_ISMEMBER);
+    userInfo.isvertify = SpUtil.getInt(SP_USER_ISVERTIFY);
+
+    return userInfo;
   }
 }

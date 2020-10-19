@@ -52,4 +52,9 @@ class User {
 
     return data;
   }
+
+  @override
+  String toString() {
+    return 'User{id: $id, username: $username, nick: $nick, headurl: $headurl, decs: $decs, gender: $gender, followCount: $followCount, fanCount: $fanCount, ismember: $ismember, isvertify: $isvertify}';
+  }
 }

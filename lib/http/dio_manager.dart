@@ -31,13 +31,27 @@ class DioManager{
     _requestHttp(url, successCallBack, "post", params, errorCallBack);
   }
 
-   _requestHttp(String url, Function successCallBack,
+  //get请求
+  get(String url, FormData params, Function successCallBack,
+      Function errorCallBack) async {
+    _requestHttp(url, successCallBack, 'get', params, errorCallBack);
+  }
+
+
+  _requestHttp(String url, Function successCallBack,
       [String method, FormData params, Function errorCallBack]) async {
     Response response;
     try{
       if("post" == method) {
         if(params!=null && params.fields!=null) {
           response = await dio.post(url,data: params);
+        }
+      }else if(method == 'get') {
+        if (params != null) {
+          response = await dio.get(url,
+              queryParameters: Map.fromEntries(params.fields));
+        } else {
+          response = await dio.get(url);
         }
       }
     } on DioError catch(error){

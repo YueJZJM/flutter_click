@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutterweibo/constant/constant.dart';
 import 'package:flutterweibo/routers/application.dart';
 import 'package:flutterweibo/routers/routers.dart';
+import 'package:flutterweibo/utils/sp_util.dart';
 import 'package:flutterweibo/utils/user_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +16,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    SpUtil.getInstance();
+
     Future.delayed(new Duration(seconds: 1),(){
        UserUtil.isLogin().then((isLogin){
           if(isLogin) {

@@ -11,17 +11,18 @@ import 'routers/application.dart';
 
 void main(){
   runApp(MyApp());
-  if (Platform.isAndroid) {
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
-      systemNavigationBarColor: Color(0xffffffff),
-      systemNavigationBarIconBrightness: Brightness.dark,
-      systemNavigationBarDividerColor: Color(0xffffffff),
-      statusBarColor: Colors.black,
-      statusBarIconBrightness: Brightness.light,
-      statusBarBrightness: Brightness.light,
-    );
-    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-  }
+  // if (Platform.isAndroid) {
+  //   SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+  //     systemNavigationBarColor: Color(0xffffffff),
+  //     systemNavigationBarIconBrightness: Brightness.dark,
+  //     systemNavigationBarDividerColor: Color(0xffffffff),
+  //     statusBarColor: Colors.black,
+  //     statusBarIconBrightness: Brightness.light,
+  //     statusBarBrightness: Brightness.light,
+  //   );
+  //   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  // }
+
 }
 
 class MyApp extends StatelessWidget {

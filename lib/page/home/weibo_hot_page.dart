@@ -57,33 +57,13 @@ class _WeiBoHotPageState extends State<WeiBoHotPage> {
               child:TabBarView(
                 controller: _controller,
                   children:  <Widget>[
-                    Center(
-                      child: Text("暂无数据1"),
-                    ),
-                    Center(
-                      child: Text("暂无数据2"),
-                    ),
-                    Center(
-                      child: Text("暂无数据3"),
-                    ),
-                    Center(
-                      child: Text("暂无数据4"),
-                    ),
-                    Center(
-                      child: Text("暂无数据5"),
-                    ),
-                    Center(
-                      child: Text("暂无数据6"),
-
-                    ),
-                    Center(
-                      child: MaterialButton(
-                        onPressed: (){
-                          print("7777");
-                        },
-                          child: Text("暂无数据7")),
-                    ),
-                    //  new WeiBoHomeListPager(),
+                    WeiBoHomeListPage(mCatId : "1"),
+                    WeiBoHomeListPage(mCatId : "2"),
+                    WeiBoHomeListPage(mCatId : "3"),
+                    WeiBoHomeListPage(mCatId : "4"),
+                    WeiBoHomeListPage(mCatId : "5"),
+                    WeiBoHomeListPage(mCatId : "6"),
+                    WeiBoHomeListPage(mCatId : "7"),
                   ],
               ) )
         ],
